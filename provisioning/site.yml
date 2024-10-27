@@ -1,0 +1,8 @@
+---
+-   name: Food Project
+    hosts: site
+    remote_user: root
+    roles:
+#      - docker
+#      - certbot
+      - site

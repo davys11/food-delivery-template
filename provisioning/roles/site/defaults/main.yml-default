@@ -1,0 +1,4 @@
+certbot_email: {YOUR_EMAIL}
+certbot_hosts:
+  - {YOUR_DOMAIN_1}
+  - {YOUR_DOMAIN_N}
