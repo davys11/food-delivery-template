@@ -2,6 +2,17 @@
 
 declare(strict_types=1);
 
-header('Content-Type: application/json');
+use Slim\Factory\AppFactory;
+use Slim\Psr7\Request;
+use Slim\Psr7\Response;
 
-echo '{}';
+require __DIR__ . '/../vendor/autoload.php';
+
+$app = AppFactory::create();
+
+$app->get('/', function (Request $request, Response $response, $args) {
+    $response->getBody()->write('{Hello There}');
+    return $response->withHeader('Content-Type', 'application/json');
+});
+
+$app->run();

@@ -1,0 +1,25 @@
+{
+    "name": "davys/devivery-food-template",
+    "autoload": {
+        "psr-4": {
+            "Davys\\DeviveryFoodTemplate\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Davydov Sergey"
+        }
+    ],
+    "config": {
+        "process-timeout": 0,
+        "sort-packages": true
+    },
+    "require": {
+        "php": "^7.4",
+        "slim/psr7": "^1.6",
+        "slim/slim": "^4.14"
+    },
+    "require-dev": {
+        "roave/security-advisories": "dev-master"
+    }
+}

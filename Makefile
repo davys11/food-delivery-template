@@ -1,10 +1,7 @@
-init: docker-down docker-pull docker-build docker-network docker-up
+init: docker-down docker-pull docker-build docker-up api-init
 up: docker-up
 down: docker-down
 restart: down up
-
-docker-network:
-	docker network create my_custom_network || true
 
 docker-up:
 	docker compose up -d
@@ -20,6 +17,11 @@ docker-pull:
 
 docker-build:
 	docker compose build --pull
+
+api-init: api-composer-install
+
+api-composer-install:
+	docker compose run --rm api-php-cli composer install
 
 push: push-gateway push-frontend push-api
 
@@ -43,6 +45,7 @@ build-frontend:
 
 build-api:
 	docker --log-level=debug build --pull --file=api/docker/production/php-fpm/Dockerfile --tag=${REGISTRY}/food-api-php-fpm:${IMAGE_TAG} api --platform=linux/amd64
+	docker --log-level=debug build --pull --file=api/docker/production/php-cli/Dockerfile --tag=${REGISTRY}/food-api-php-cli:${IMAGE_TAG} api --platform=linux/amd64
 	docker --log-level=debug build --pull --file=api/docker/production/nginx/Dockerfile --tag=${REGISTRY}/food-api:${IMAGE_TAG} api --platform=linux/amd64
 
 try-build:
