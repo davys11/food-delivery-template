@@ -3,16 +3,17 @@
 declare(strict_types=1);
 
 use Slim\Factory\AppFactory;
-use Slim\Psr7\Request;
-use Slim\Psr7\Response;
+use DI\ContainerBuilder;
+
+http_response_code(500);
 
 require __DIR__ . '/../vendor/autoload.php';
 
-$app = AppFactory::create();
+$container = require __DIR__ . '/../config/container.php';
 
-$app->get('/', function (Request $request, Response $response, $args) {
-    $response->getBody()->write('{Hello There}');
-    return $response->withHeader('Content-Type', 'application/json');
-});
+$app = AppFactory::createFromContainer($container);
+
+(require __DIR__ . '/../config/middleware.php')($app, $container);
+(require __DIR__ . '/../config/routes.php')($app);
 
 $app->run();

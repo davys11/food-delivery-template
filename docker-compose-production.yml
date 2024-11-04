@@ -26,6 +26,8 @@ services:
   api-php-fpm:
     image: ${REGISTRY}/food-api-php-fpm:${IMAGE_TAG}
     restart: always
+    environment:
+      APP_DEBUG: 0
 
   api-php-cli:
     image: ${REGISTRY}/food-api-cli-fpm:${IMAGE_TAG}
